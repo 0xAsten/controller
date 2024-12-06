@@ -17,6 +17,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Separator,
 } from "@cartridge/ui-next";
 
 export function CreateSession({
@@ -105,18 +106,17 @@ export function CreateSession({
       </Content>
 
       <Footer>
+        <Separator />
         {error && isControllerError(error) && (
           <ControllerErrorAlert error={error} />
         )}
         {!error && (
           <div className="flex flex-col">
-            <div className="flex items-center text-sm text-muted-foreground">
-              <div>Expires in </div>
+            <div className="flex items-center text-sm text-muted-foreground py-4 gap-2">
+              <div className="font-medium">Expires in </div>
               <Select
                 value={duration.toString()}
-                onValueChange={(val) => {
-                  setDuration(BigInt(val));
-                }}
+                onValueChange={(val) => setDuration(BigInt(val))}
               >
                 <SelectTrigger className="w-28">
                   <SelectValue
@@ -133,7 +133,6 @@ export function CreateSession({
                   <SelectItem value={(60 * 60 * 24 * 7).toString()}>
                     1 WEEK
                   </SelectItem>
-                  <SelectItem value={"never"}>NEVER</SelectItem>
                 </SelectContent>
               </Select>
             </div>
